@@ -66,7 +66,7 @@ namespace kazakov_andrey_kt_43_21.Database.Configurations
         .OnDelete(DeleteBehavior.Cascade);
 
       builder.ToTable(TableName)
-        .HasIndex(p => p.Position, $"idx_{TableName}_fk_c_department_id");
+        .HasIndex(p => p.PositionId, $"idx_{TableName}_fk_c_position_id");
 
       builder.Navigation(p => p.Position)
         .AutoInclude();

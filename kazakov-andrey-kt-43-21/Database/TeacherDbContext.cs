@@ -15,7 +15,7 @@ namespace kazakov_andrey_kt_43_21.Database
     {
       modelBuilder.ApplyConfiguration(new TeachersConfiguration());
       modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-      modelBuilder.ApplyConfiguration(new TeachersConfiguration());
+      modelBuilder.ApplyConfiguration(new PositionConfiguration());
     }
 
     public TeacherDbContext(DbContextOptions<TeacherDbContext> options) : base(options)

@@ -18,12 +18,10 @@ namespace kazakov_andrey_kt_43_21.Database.Configurations
       builder.Property(p => p.DepartmentId)
               .ValueGeneratedOnAdd();
 
-      //Расписываем как будут называться колонки в БД, а так же их обязательность и тд
       builder.Property(p => p.DepartmentId)
           .HasColumnName("department_id")
           .HasComment("Идентификатор записи кафедры");
 
-      //HasComment добавит комментарий, который будет отображаться в СУБД (добавлять по желанию)
       builder.Property(p => p.DepartmentName)
           .IsRequired()
           .HasColumnName("c_department_name")
