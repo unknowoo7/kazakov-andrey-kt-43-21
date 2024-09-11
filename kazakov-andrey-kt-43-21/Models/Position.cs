@@ -2,7 +2,7 @@
 {
   public class Position
   {
-    public string PositionId { get; set; }
+    public int PositionId { get; set; }
 
     public string PositionName { get; set; }
   }

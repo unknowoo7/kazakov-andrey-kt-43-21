@@ -15,6 +15,9 @@ namespace kazakov_andrey_kt_43_21.Database.Configurations
         .HasName($"pk_{TableName}_teacher_id");
 
       builder.Property(t => t.TeachersId)
+             .ValueGeneratedOnAdd();
+
+      builder.Property(t => t.TeachersId)
         .HasColumnName("teacher_id")
         .HasComment("Идентификатор записи студента");
 
@@ -34,41 +37,39 @@ namespace kazakov_andrey_kt_43_21.Database.Configurations
 
       builder.Property(p => p.DepartmentId)
         .IsRequired()
-        .HasColumnName("c_department_id")
-        .HasColumnType(ColumnType.String);
+        .HasColumnName("f_department_id")
+        .HasColumnType(ColumnType.Int);
 
       builder.ToTable(TableName)
         .HasOne(p => p.Department)
         .WithMany()
         .HasForeignKey(p => p.DepartmentId)
-        .HasConstraintName("fk_c_department_id")
+        .HasConstraintName("fk_f_department_id")
         .OnDelete(DeleteBehavior.Cascade);
 
       builder.ToTable(TableName)
-        .HasIndex(p => p.DepartmentId, $"idx_{TableName}_fk_c_department_id");
+        .HasIndex(p => p.DepartmentId, $"idx_{TableName}_fk_f_department_id");
 
       builder.Navigation(p => p.Department)
         .AutoInclude();
 
-    //https://github.com/Evil-maker/ivan-ivanov-kt-31-20/blob/master/IvanIvanovKt-31-20/Database/Configurations/StudentConfiguration.cs
+      builder.Property(p => p.PositionId)
+        .IsRequired()
+        .HasColumnName("f_position_id")
+        .HasColumnType(ColumnType.Int);
 
-      //builder.Property(p => p.PositionId)
-      //  .IsRequired()
-      //  .HasColumnName("c_position_id")
-      //  .HasColumnType(ColumnType.String);
+      builder.ToTable(TableName)
+        .HasOne(p => p.Position)
+        .WithMany()
+        .HasForeignKey(p => p.PositionId)
+        .HasConstraintName("fk_f_position_id")
+        .OnDelete(DeleteBehavior.Cascade);
 
-      //builder.ToTable(TableName)
-      //  .HasOne(p => p.Position)
-      //  .WithMany()
-      //  .HasForeignKey(p => p.PositionId)
-      //  .HasConstraintName("fk_c_position_id")
-      //  .OnDelete(DeleteBehavior.Cascade);
+      builder.ToTable(TableName)
+        .HasIndex(p => p.Position, $"idx_{TableName}_fk_c_department_id");
 
-      //builder.ToTable(TableName)
-      //  .HasIndex(p => p.DepartmentId, $"idx_{TableName}_fk_c_department_id");
-
-      //builder.Navigation(p => p.Department)
-      //  .AutoInclude();
+      builder.Navigation(p => p.Position)
+        .AutoInclude();
     }
   }
 }
