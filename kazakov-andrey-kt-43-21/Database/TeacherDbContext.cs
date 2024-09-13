@@ -7,7 +7,7 @@ namespace kazakov_andrey_kt_43_21.Database
   public class TeacherDbContext : DbContext
   {
 
-    DbSet<Teachers> Teachers { get; set; }
+    DbSet<Teacher> Teachers { get; set; }
     DbSet<Department> Department { get; set; }
     DbSet<Position> Positions { get; set; }
 
