@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace kazakov_andrey_kt_43_21.Database.Configurations
 {
-  public class TeachersConfiguration : IEntityTypeConfiguration<Teachers>
+  public class TeachersConfiguration : IEntityTypeConfiguration<Teacher>
   {
     private const string TableName = "cd_teacher";
-    public void Configure(EntityTypeBuilder<Teachers> builder)
+    public void Configure(EntityTypeBuilder<Teacher> builder)
     {
       builder
         .HasKey(t => t.TeachersId)

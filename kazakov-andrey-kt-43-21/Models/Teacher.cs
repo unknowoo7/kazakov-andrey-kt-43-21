@@ -1,6 +1,6 @@
 ﻿namespace kazakov_andrey_kt_43_21.Models
 {
-  public class Teachers
+  public class Teacher
   {
     public int TeachersId { get; set; }
     public string FirstName { get; set; }
