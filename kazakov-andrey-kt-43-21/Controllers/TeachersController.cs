@@ -18,10 +18,24 @@ namespace kazakov_andrey_kt_43_21.Controllers
       _teacherService = teacherService;
     }
 
-    [HttpPost(Name = "GetTeachersByGroup")]
-    public async Task<IActionResult> GetTeachersByGroupAsyns(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
+    [HttpPost(Name = "GetTeachersByData")]
+    public async Task<IActionResult> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
+    {
+      var teachers = await _teacherService.GetTeachersByDataAsync(filter, cancellationToken);
+      return Ok(teachers);
+    }
+
+    [HttpPost(Name = "GetTeachersByDepartment")]
+    public async Task<IActionResult> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
     {
       var teachers = await _teacherService.GetTeachersByDepartmentAsync(filter, cancellationToken);
+      return Ok(teachers);
+    }
+
+    [HttpPost(Name = "GetTeachersByPosition")]
+    public async Task<IActionResult> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken = default)
+    {
+      var teachers = await _teacherService.GetTeachersByPositionAsync(filter, cancellationToken);
       return Ok(teachers);
     }
   }
