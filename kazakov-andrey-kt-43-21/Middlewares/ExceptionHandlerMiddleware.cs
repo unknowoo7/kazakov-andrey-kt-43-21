@@ -70,4 +70,3 @@ namespace kazakov_andrey_kt_43_21.Middlewares
     }
   }
 }
-}

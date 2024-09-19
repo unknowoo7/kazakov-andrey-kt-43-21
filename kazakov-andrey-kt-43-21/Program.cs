@@ -5,6 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 
+/*
+  Добавление, уд, реда
+  Фильтрация по всем полям
+*/
+
 var builder = WebApplication.CreateBuilder(args);
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
