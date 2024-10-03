@@ -1,5 +1,6 @@
 ﻿using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
 using kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces;
+using kazakov_andrey_kt_43_21.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace kazakov_andrey_kt_43_21.Controllers
@@ -18,21 +19,21 @@ namespace kazakov_andrey_kt_43_21.Controllers
       _teacherService = teacherService;
     }
 
-    [HttpPost(Name = "GetTeachersByData")]
+    [HttpPost("GetTeachersByDataAsync")]
     public async Task<IActionResult> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
     {
       var teachers = await _teacherService.GetTeachersByDataAsync(filter, cancellationToken);
       return Ok(teachers);
     }
 
-    [HttpPost(Name = "GetTeachersByDepartment")]
+    [HttpPost("GetTeachersByDepartmentAsync")]
     public async Task<IActionResult> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
     {
       var teachers = await _teacherService.GetTeachersByDepartmentAsync(filter, cancellationToken);
       return Ok(teachers);
     }
 
-    [HttpPost(Name = "GetTeachersByPosition")]
+    [HttpPost("GetTeachersByPosition")]
     public async Task<IActionResult> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken = default)
     {
       var teachers = await _teacherService.GetTeachersByPositionAsync(filter, cancellationToken);
