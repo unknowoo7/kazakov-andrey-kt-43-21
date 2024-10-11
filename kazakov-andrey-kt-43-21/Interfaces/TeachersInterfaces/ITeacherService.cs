@@ -2,6 +2,7 @@
 using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 /*
  2)Получение списка преподавателей (учесть фильтрацию по кафедре, по степени, по должности)
@@ -17,6 +18,7 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
     public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken);
     public Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken);
     public Task<Teacher[]> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken);
+    public Task<Teacher> AddTeacher(Teacher teacher);
   }
 
   public class TeacherService : ITeacherService
@@ -26,6 +28,13 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
     public TeacherService(TeacherDbContext dbContext)
     {
       _dbContext = dbContext;
+    }
+
+    public async Task<Teacher> AddTeacher(Teacher teacher)
+    {
+      _dbContext.Add(teacher);
+      await _dbContext.SaveChangesAsync();
+      return teacher;
     }
 
     public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)

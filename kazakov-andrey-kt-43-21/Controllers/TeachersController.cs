@@ -39,5 +39,13 @@ namespace kazakov_andrey_kt_43_21.Controllers
       var teachers = await _teacherService.GetTeachersByPositionAsync(filter, cancellationToken);
       return Ok(teachers);
     }
+
+    [HttpPost("add")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> AddTeacher([FromQuery] int n,  Teacher teacher)
+    {
+      return Ok(await _teacherService.AddTeacher(teacher));
+    }
   }
 }
