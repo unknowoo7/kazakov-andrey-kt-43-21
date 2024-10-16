@@ -1,4 +1,5 @@
-﻿using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
+﻿using kazakov_andrey_kt_43_21.Dto;
+using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
 using kazakov_andrey_kt_43_21.Interfaces.DepartmentInterfaces;
 using kazakov_andrey_kt_43_21.Interfaces.PositionInterfaces;
 using kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces;
@@ -50,14 +51,21 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [HttpPost("add")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> AddTeacher([FromQuery] int departmentId, [FromQuery] int positionId, Teacher teacher)
+    public async Task<IActionResult> AddTeacher([FromQuery] int departmentId, [FromQuery] int positionId, TeacherDto teacher)
     {
       Position position = _positionService.GetPositionById(positionId);
       Department department = _departmentService.GetDepartmentById(departmentId);
 
-      teacher.Position = position;
-      teacher.Department = department;
-      return Ok(await _teacherService.AddTeacher(teacher));
+      Teacher newTeacher = new Teacher { FirstName = teacher.FirstName, LastName = teacher.LastName, MiddleName = teacher.MiddleName };
+
+      newTeacher.PositionId = positionId;
+      newTeacher.Position = position;
+      newTeacher.DepartmentId = departmentId;
+      newTeacher.Department = department;
+
+      // Посмотреть как сделано в покемонах
+
+      return Ok(await _teacherService.AddTeacher(newTeacher));
     }
   }
 }
