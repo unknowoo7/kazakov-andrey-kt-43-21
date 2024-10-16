@@ -19,8 +19,10 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
     public Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken);
     public Task<Teacher[]> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken);
     public Task<Teacher> AddTeacher(Teacher teacher);
+    public Teacher GetTeacherById(int teacherId);
     public bool TeacherExists(int teacherId);
     public bool UpdateTeacher(Teacher teacher);
+    public bool DeleteTeacher(Teacher teacher);
   }
 
   public class TeacherService : ITeacherService
@@ -37,6 +39,11 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
       _dbContext.Add(teacher);
       await _dbContext.SaveChangesAsync();
       return teacher;
+    }
+
+    public Teacher GetTeacherById(int teacherId)
+    {
+      return _dbContext.Teachers.Where(t => t.TeachersId == teacherId).FirstOrDefault();
     }
 
     public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
@@ -70,5 +77,12 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
       _dbContext.Update(teacher);
       return _dbContext.SaveChanges() > 0;
     }
+
+    public bool DeleteTeacher(Teacher teacher)
+    {
+      _dbContext.Remove(teacher);
+      return _dbContext.SaveChanges() > 0;
+    }
+
   }
 }

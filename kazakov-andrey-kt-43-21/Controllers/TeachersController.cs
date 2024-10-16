@@ -105,5 +105,30 @@ namespace kazakov_andrey_kt_43_21.Controllers
 
       return NoContent();
     }
+
+
+    [HttpDelete("{teacherId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteOwner(int teacherId)
+    {
+      if (!_teacherService.TeacherExists(teacherId))
+      {
+        return NotFound();
+      }
+
+      var teacherToDelete = _teacherService.GetTeacherById(teacherId);
+
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+      if (!_teacherService.DeleteTeacher(teacherToDelete))
+      {
+        ModelState.AddModelError("", "Something went wrong deleting teacher");
+      }
+
+      return NoContent();
+    }
   }
 }
