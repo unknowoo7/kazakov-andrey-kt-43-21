@@ -67,5 +67,43 @@ namespace kazakov_andrey_kt_43_21.Controllers
 
       return Ok(await _teacherService.AddTeacher(newTeacher));
     }
+
+
+    [HttpPut("{teacherId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult UpdateTeacher(int teacherId, TeacherDto updatedTeacher)
+    {
+      if (updatedTeacher == null)
+        return BadRequest(ModelState);
+
+      if (!_teacherService.TeacherExists(teacherId))
+        return NotFound();
+
+      if (!ModelState.IsValid)
+        return BadRequest();
+
+      Position position = _positionService.GetPositionById(updatedTeacher.positionId);
+      Department department = _departmentService.GetDepartmentById(updatedTeacher.departmentId);
+
+      Teacher teacher = new Teacher { 
+        Department = department,
+        Position = position,
+        FirstName = updatedTeacher.FirstName,
+        LastName = updatedTeacher.LastName,
+        MiddleName = updatedTeacher.MiddleName,
+        DepartmentId = updatedTeacher.departmentId,
+        PositionId = updatedTeacher.positionId
+      };
+
+      if (!_teacherService.UpdateTeacher(teacher))
+      {
+        ModelState.AddModelError("", "Something went wrong updating teacher");
+        return StatusCode(500, ModelState);
+      }
+
+      return NoContent();
+    }
   }
 }
