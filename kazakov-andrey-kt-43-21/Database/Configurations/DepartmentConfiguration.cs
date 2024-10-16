@@ -3,6 +3,7 @@ using kazakov_andrey_kt_43_21.Database.Helper;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Runtime.Intrinsics.Arm;
 
 namespace kazakov_andrey_kt_43_21.Database.Configurations
 {
@@ -21,6 +22,11 @@ namespace kazakov_andrey_kt_43_21.Database.Configurations
       builder.Property(p => p.DepartmentId)
           .HasColumnName("department_id")
           .HasComment("Идентификатор записи кафедры");
+
+      builder.HasOne(d => d.Teacher)
+        .WithOne()
+        .HasForeignKey<Department>(t => t.TeacherHeaderId)
+        .OnDelete(DeleteBehavior.Cascade);
 
       builder.Property(p => p.DepartmentName)
           .IsRequired()

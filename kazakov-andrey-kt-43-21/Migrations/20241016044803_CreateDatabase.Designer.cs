@@ -11,7 +11,7 @@ using kazakov_andrey_kt_43_21.Database;
 namespace kazakov_andrey_kt_43_21.Migrations
 {
     [DbContext(typeof(TeacherDbContext))]
-    [Migration("20240911172628_CreateDatabase")]
+    [Migration("20241016044803_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace kazakov_andrey_kt_43_21.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -41,8 +41,14 @@ namespace kazakov_andrey_kt_43_21.Migrations
                         .HasColumnName("c_department_name")
                         .HasComment("Название кафедры");
 
+                    b.Property<int>("TeacherHeaderId")
+                        .HasColumnType("integer");
+
                     b.HasKey("DepartmentId")
                         .HasName("pk_cd_departament_department_id");
+
+                    b.HasIndex("TeacherHeaderId")
+                        .IsUnique();
 
                     b.ToTable("cd_departament", (string)null);
                 });
@@ -70,7 +76,7 @@ namespace kazakov_andrey_kt_43_21.Migrations
                     b.ToTable("cd_position", (string)null);
                 });
 
-            modelBuilder.Entity("kazakov_andrey_kt_43_21.Models.Teachers", b =>
+            modelBuilder.Entity("kazakov_andrey_kt_43_21.Models.Teacher", b =>
                 {
                     b.Property<int>("TeachersId")
                         .ValueGeneratedOnAdd()
@@ -116,7 +122,18 @@ namespace kazakov_andrey_kt_43_21.Migrations
                     b.ToTable("cd_teacher", (string)null);
                 });
 
-            modelBuilder.Entity("kazakov_andrey_kt_43_21.Models.Teachers", b =>
+            modelBuilder.Entity("kazakov_andrey_kt_43_21.Models.Department", b =>
+                {
+                    b.HasOne("kazakov_andrey_kt_43_21.Models.Teacher", "Teacher")
+                        .WithOne()
+                        .HasForeignKey("kazakov_andrey_kt_43_21.Models.Department", "TeacherHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("kazakov_andrey_kt_43_21.Models.Teacher", b =>
                 {
                     b.HasOne("kazakov_andrey_kt_43_21.Models.Department", "Department")
                         .WithMany()

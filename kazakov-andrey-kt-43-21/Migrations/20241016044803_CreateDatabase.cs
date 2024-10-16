@@ -12,19 +12,6 @@ namespace kazakov_andrey_kt_43_21.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "cd_departament",
-                columns: table => new
-                {
-                    department_id = table.Column<int>(type: "integer", nullable: false, comment: "Идентификатор записи кафедры")
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    c_department_name = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Название кафедры")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_cd_departament_department_id", x => x.department_id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "cd_position",
                 columns: table => new
                 {
@@ -35,6 +22,20 @@ namespace kazakov_andrey_kt_43_21.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_cd_position_position_id", x => x.position_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "cd_departament",
+                columns: table => new
+                {
+                    department_id = table.Column<int>(type: "integer", nullable: false, comment: "Идентификатор записи кафедры")
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    c_department_name = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Название кафедры"),
+                    TeacherHeaderId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_cd_departament_department_id", x => x.department_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,6 +68,12 @@ namespace kazakov_andrey_kt_43_21.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_cd_departament_TeacherHeaderId",
+                table: "cd_departament",
+                column: "TeacherHeaderId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "idx_cd_teacher_fk_c_position_id",
                 table: "cd_teacher",
                 column: "f_position_id");
@@ -75,11 +82,23 @@ namespace kazakov_andrey_kt_43_21.Migrations
                 name: "idx_cd_teacher_fk_f_department_id",
                 table: "cd_teacher",
                 column: "f_department_id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_cd_departament_cd_teacher_TeacherHeaderId",
+                table: "cd_departament",
+                column: "TeacherHeaderId",
+                principalTable: "cd_teacher",
+                principalColumn: "teacher_id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_cd_departament_cd_teacher_TeacherHeaderId",
+                table: "cd_departament");
+
             migrationBuilder.DropTable(
                 name: "cd_teacher");
 
