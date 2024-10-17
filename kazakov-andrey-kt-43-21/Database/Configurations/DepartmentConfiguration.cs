@@ -1,9 +1,7 @@
-﻿
-using kazakov_andrey_kt_43_21.Database.Helper;
+﻿using kazakov_andrey_kt_43_21.Database.Helper;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Runtime.Intrinsics.Arm;
 
 namespace kazakov_andrey_kt_43_21.Database.Configurations
 {
