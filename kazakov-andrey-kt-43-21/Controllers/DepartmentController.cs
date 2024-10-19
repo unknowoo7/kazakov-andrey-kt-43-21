@@ -31,12 +31,12 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [HttpPost("add")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> AddDeparment([FromBody] Department department)
+    public async Task<IActionResult> AddDepartment([FromBody] Department department)
     {
       return Ok(await _departmentService.AddDepartment(department));
     }
 
-    [HttpPut("{teacherId}")]
+    [HttpPut("{departmentId}")]
     [ProducesResponseType(400)]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
@@ -61,6 +61,33 @@ namespace kazakov_andrey_kt_43_21.Controllers
       {
         ModelState.AddModelError("", "Something went wrong updating department");
         return StatusCode(500, ModelState);
+      }
+
+      return NoContent();
+    }
+
+
+    [HttpDelete("{departmentId}")]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public IActionResult DeleteDepartment(int departmentId)
+    {
+      if (!_departmentService.DepartmentExists(departmentId))
+      {
+        return NotFound();
+      }
+
+      var departmentToDelete = _departmentService.GetDepartmentById(departmentId);
+
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      if (!_departmentService.DeleteDepartment(departmentToDelete))
+      {
+        ModelState.AddModelError("", "Something went wrong deleting department");
       }
 
       return NoContent();

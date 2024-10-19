@@ -51,19 +51,17 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [HttpPost("add")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> AddTeacher([FromQuery] int departmentId, [FromQuery] int positionId, TeacherDto teacher)
+    public async Task<IActionResult> AddTeacher(TeacherDto teacher)
     {
-      Position position = _positionService.GetPositionById(positionId);
-      Department department = _departmentService.GetDepartmentById(departmentId);
+      Position position = _positionService.GetPositionById(teacher.positionId);
+      Department department = _departmentService.GetDepartmentById(teacher.departmentId);
 
       Teacher newTeacher = new Teacher { FirstName = teacher.FirstName, LastName = teacher.LastName, MiddleName = teacher.MiddleName };
 
-      newTeacher.PositionId = positionId;
+      newTeacher.PositionId = teacher.positionId;
       newTeacher.Position = position;
-      newTeacher.DepartmentId = departmentId;
+      newTeacher.DepartmentId = teacher.departmentId;
       newTeacher.Department = department;
-
-      // Посмотреть как сделано в покемонах
 
       return Ok(await _teacherService.AddTeacher(newTeacher));
     }
