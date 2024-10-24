@@ -15,6 +15,7 @@ namespace kazakov_andrey_kt_43_21.Interfaces.DepartmentInterfaces
   {
     public Task<Department> DeleteDepartment(TeacherDepartmentFilter department, CancellationToken cancellationToken);
     public Department GetDepartmentById(int id);
+    public ICollection<Department> GetDepartment();
     public Task<Department> AddDepartment (Department department);
     public bool DepartmentExists (int deparmentId);
     public bool UpdateDepartment (Department department);
@@ -28,6 +29,11 @@ namespace kazakov_andrey_kt_43_21.Interfaces.DepartmentInterfaces
     public DepartmentService(TeacherDbContext dbContext)
     {
       _dbContext = dbContext;
+    }
+
+    public ICollection<Department> GetDepartment()
+    {
+      return _dbContext.Department.ToList();
     }
 
     public Department GetDepartmentById(int id)

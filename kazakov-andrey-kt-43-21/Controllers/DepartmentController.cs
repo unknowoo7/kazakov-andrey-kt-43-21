@@ -3,6 +3,7 @@ using kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 
 /**
@@ -28,6 +29,13 @@ namespace kazakov_andrey_kt_43_21.Controllers
       _departmentService = departmentService;
     }
 
+    [HttpGet]
+    [ProducesResponseType(200, Type = typeof(IEnumerable<Department>))]
+    public IActionResult GetDepartment()
+    {
+      return Ok(_departmentService.GetDepartment());
+    }
+
     [HttpPost("add")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -40,14 +48,14 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [ProducesResponseType(400)]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
-    public IActionResult UpdateDepartment(int departmentId, Department department) 
+    public IActionResult UpdateDepartment(Department department) 
     { 
       if (department == null)
       {
         return BadRequest(ModelState);
       }
 
-      if (!_departmentService.DepartmentExists(departmentId))
+      if (!_departmentService.DepartmentExists(department.DepartmentId))
       {
         return NotFound();
       }
