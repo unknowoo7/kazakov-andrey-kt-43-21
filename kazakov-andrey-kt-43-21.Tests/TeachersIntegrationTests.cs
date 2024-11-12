@@ -1,5 +1,5 @@
 ﻿using kazakov_andrey_kt_43_21.Database;
-using kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces;
+using kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.EntityFrameworkCore;
 using System;

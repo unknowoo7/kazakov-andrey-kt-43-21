@@ -2,7 +2,7 @@
 using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
 using kazakov_andrey_kt_43_21.Interfaces.DepartmentInterfaces;
 using kazakov_andrey_kt_43_21.Interfaces.PositionInterfaces;
-using kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces;
+using kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +15,7 @@ namespace kazakov_andrey_kt_43_21.Controllers
     private readonly IPositionService _positionService;
     private readonly IDepartmentService _departmentService;
     private readonly ITeacherService _teacherService;
+    private readonly ITeacherFilterService _teacherFilterService;
 
     public TeachersController(IPositionService positionService, IDepartmentService departmentService, ITeacherService teacherService)
     {
@@ -27,7 +28,7 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [HttpPost("GetTeachersByDataAsync")]
     public async Task<IActionResult> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
     {
-      var teachers = await _teacherService.GetTeachersByDataAsync(filter, cancellationToken);
+      var teachers = await _teacherFilterService.GetTeachersByDataAsync(filter, cancellationToken);
       return Ok(teachers);
     }
 
@@ -35,7 +36,7 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [HttpPost("GetTeachersByDepartmentAsync")]
     public async Task<IActionResult> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
     {
-      var teachers = await _teacherService.GetTeachersByDepartmentAsync(filter, cancellationToken);
+      var teachers = await _teacherFilterService.GetTeachersByDepartmentAsync(filter, cancellationToken);
       return Ok(teachers);
     }
 
@@ -43,7 +44,7 @@ namespace kazakov_andrey_kt_43_21.Controllers
     [HttpPost("GetTeachersByPosition")]
     public async Task<IActionResult> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken = default)
     {
-      var teachers = await _teacherService.GetTeachersByPositionAsync(filter, cancellationToken);
+      var teachers = await _teacherFilterService.GetTeachersByPositionAsync(filter, cancellationToken);
       return Ok(teachers);
     }
 
@@ -116,7 +117,7 @@ namespace kazakov_andrey_kt_43_21.Controllers
         return NotFound();
       }
 
-      var teacherToDelete = _teacherService.GetTeacherById(teacherId);
+      var teacherToDelete = _teacherFilterService.GetTeacherById(teacherId);
 
       if (!ModelState.IsValid)
         return BadRequest(ModelState);

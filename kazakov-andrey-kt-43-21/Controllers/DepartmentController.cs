@@ -1,5 +1,5 @@
 ﻿using kazakov_andrey_kt_43_21.Interfaces.DepartmentInterfaces;
-using kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces;
+using kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces;
 using kazakov_andrey_kt_43_21.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

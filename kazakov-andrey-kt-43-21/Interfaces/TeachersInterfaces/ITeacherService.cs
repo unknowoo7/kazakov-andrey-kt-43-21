@@ -1,8 +1,5 @@
 ﻿using kazakov_andrey_kt_43_21.Database;
-using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
 using kazakov_andrey_kt_43_21.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 /*
  2)Получение списка преподавателей (учесть фильтрацию по кафедре, по степени, по должности)
@@ -11,15 +8,11 @@ using Microsoft.EntityFrameworkCore.Internal;
 */
 
 
-namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
+namespace kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces
 {
   public interface ITeacherService
   {
-    public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken);
-    public Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken);
-    public Task<Teacher[]> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken);
     public Task<Teacher> AddTeacher(Teacher teacher);
-    public Teacher GetTeacherById(int teacherId);
     public bool TeacherExists(int teacherId);
     public bool UpdateTeacher(Teacher teacher);
     public bool DeleteTeacher(Teacher teacher);
@@ -38,32 +31,6 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
     {
       _dbContext.Add(teacher);
       await _dbContext.SaveChangesAsync();
-      return teacher;
-    }
-
-    public Teacher GetTeacherById(int teacherId)
-    {
-      return _dbContext.Teachers.Where(t => t.TeachersId == teacherId).FirstOrDefault();
-    }
-
-    public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
-    {
-      var teacher = _dbContext.Set<Teacher>().Where(w => w.FirstName == filter.FirstName && w.LastName == filter.LastName && w.MiddleName == filter.MiddleName).ToArrayAsync(cancellationToken);
-
-      return teacher;
-    }
-
-    public async Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
-    {
-      var teacher = await _dbContext.Set<Teacher>().Where(w => w.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
-
-      return teacher;
-    }
-
-    public Task<Teacher[]> GetTeachersByPositionAsync(TeacherPositionFilter filter, CancellationToken cancellationToken = default)
-    {
-      var teacher = _dbContext.Set<Teacher>().Where(w => w.Position.PositionName == filter.PositionName).ToArrayAsync(cancellationToken);
-
       return teacher;
     }
 
