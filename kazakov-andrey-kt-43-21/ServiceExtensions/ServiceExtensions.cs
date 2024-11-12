@@ -8,7 +8,7 @@ namespace kazakov_andrey_kt_43_21.ServiceExtensions
   {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-      services.AddScoped<ITeacherService, ITeacherFilterService>();
+      services.AddScoped<ITeacherFilterInterfaceService, ITeacherFilterService>();
       services.AddScoped<ITeacherService, TeacherService>();
       services.AddScoped<IDepartmentService, DepartmentService>();
       services.AddScoped<IPositionService, PositionService>();

@@ -15,13 +15,14 @@ namespace kazakov_andrey_kt_43_21.Controllers
     private readonly IPositionService _positionService;
     private readonly IDepartmentService _departmentService;
     private readonly ITeacherService _teacherService;
-    private readonly ITeacherFilterService _teacherFilterService;
+    private readonly ITeacherFilterInterfaceService _teacherFilterService;
 
-    public TeachersController(IPositionService positionService, IDepartmentService departmentService, ITeacherService teacherService)
+    public TeachersController(IPositionService positionService, IDepartmentService departmentService, ITeacherService teacherService, ITeacherFilterInterfaceService teacherFilterService)
     {
       _positionService = positionService;
       _teacherService = teacherService;
       _departmentService = departmentService;
+      _teacherFilterService = teacherFilterService;
     }
 
 

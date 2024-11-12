@@ -1,6 +1,7 @@
 ﻿using kazakov_andrey_kt_43_21.Database;
 using kazakov_andrey_kt_43_21.Filters.TeacherFilters;
 using kazakov_andrey_kt_43_21.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces
 {
@@ -34,7 +35,7 @@ namespace kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces
 
     public async Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
     {
-      var teacher = await _dbContext.Set<Teacher>().Where(w => w.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
+      var teacher = await _dbContext.Set<Teacher>().Where(w => w.Department.DepartmentName == filter.DepartmentName).ToArrayAsync(cancellationToken);
 
       return teacher;
     }
