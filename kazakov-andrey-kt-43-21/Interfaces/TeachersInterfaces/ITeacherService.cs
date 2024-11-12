@@ -55,7 +55,7 @@ namespace kazakov_andrey_kt_43_21.Interfaces.StudentsInterfaces
 
     public async Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
     {
-      var teacher = await _dbContext.Set<Teacher>().Where(w => w.Department.DepartmentName == filter.DepartmentName).ToArrayAsync(cancellationToken);
+      var teacher = await _dbContext.Set<Teacher>().Where(w => w.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
 
       return teacher;
     }
