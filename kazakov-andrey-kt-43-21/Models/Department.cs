@@ -13,7 +13,7 @@ namespace kazakov_andrey_kt_43_21.Models
 
     public bool isValidDepartmentName()
     {
-      return Regex.Match(DepartmentName, @"\D*").Success;
+      return Regex.Match(DepartmentName, @"^[А-ЯЁ][а-яё]*(\s[А-ЯЁ][а-яё]*)?$").Success;
     }
   }
 }

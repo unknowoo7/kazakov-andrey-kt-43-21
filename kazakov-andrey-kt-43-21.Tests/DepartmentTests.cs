@@ -14,13 +14,13 @@ namespace kazakov_andrey_kt_43_21.Tests
     public void IsValidDepartmentName_KT4321_True()
     {
       //arrange
-      var testGroup = new Department
+      var test = new Department
       {
         DepartmentName = "Химия"
       };
 
       //act
-      var result = testGroup.isValidDepartmentName();
+      var result = test.isValidDepartmentName();
 
       //assert
       Assert.True(result);
