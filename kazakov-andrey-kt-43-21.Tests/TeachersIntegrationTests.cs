@@ -25,7 +25,7 @@ namespace kazakov_andrey_kt_43_21.Tests
     public async Task GetTeachersByDepartmentAsync_IT_TwoObject()
     {
       var ctx = new TeacherDbContext(_dbContextOptions);
-      var teacherService = new TeacherService(ctx);
+      var teacherService = new ITeacherFilterService(ctx);
       var departments = new List<Department>
       {
         new Department
@@ -73,3 +73,5 @@ namespace kazakov_andrey_kt_43_21.Tests
     }
   }
 }
+
+// пусть кафедра будет называться как группа
