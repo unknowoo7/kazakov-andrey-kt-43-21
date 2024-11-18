@@ -16,7 +16,7 @@ namespace kazakov_andrey_kt_43_21.Tests
       //arrange
       var testGroup = new Department
       {
-        DepartmentName = "KT-43-21"
+        DepartmentName = "Химия"
       };
 
       //act

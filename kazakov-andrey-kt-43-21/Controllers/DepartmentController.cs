@@ -6,12 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
 
-/**
- 5)	Добавление/изменение удаление кафедр (удаление см. начало документа) 
-    при удалении кафедры, удаляются и привязанные к кафедре преподаватели
-*/
-
-
 namespace kazakov_andrey_kt_43_21.Controllers
 {
 

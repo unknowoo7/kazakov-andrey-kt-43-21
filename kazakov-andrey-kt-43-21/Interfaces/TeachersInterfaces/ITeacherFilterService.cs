@@ -23,7 +23,7 @@ namespace kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces
 
     public Teacher GetTeacherById(int teacherId)
     {
-      return _dbContext.Teachers.Where(t => t.TeachersId == teacherId).FirstOrDefault();
+      return _dbContext.Teacher.Where(t => t.TeachersId == teacherId).FirstOrDefault();
     }
 
     public Task<Teacher[]> GetTeachersByDataAsync(TeacherDataFilter filter, CancellationToken cancellationToken = default)
@@ -36,6 +36,13 @@ namespace kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces
     public async Task<Teacher[]> GetTeachersByDepartmentAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
     {
       var teacher = await _dbContext.Set<Teacher>().Where(w => w.Department.DepartmentName == filter.DepartmentName).ToArrayAsync(cancellationToken);
+
+      return teacher;
+    }
+
+    public async Task<Teacher[]> GetTeachersByDepartmentIdAsync(TeacherDepartmentFilter filter, CancellationToken cancellationToken = default)
+    {
+      var teacher = await _dbContext.Set<Teacher>().Where(w => w.DepartmentId == filter.DepartmentId).ToArrayAsync(cancellationToken);
 
       return teacher;
     }

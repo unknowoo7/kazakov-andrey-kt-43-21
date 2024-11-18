@@ -36,7 +36,7 @@ namespace kazakov_andrey_kt_43_21.Interfaces.TeachersInterfaces
 
     public bool TeacherExists(int teacherId)
     {
-      return _dbContext.Teachers.Any(t => t.TeachersId == teacherId);
+      return _dbContext.Teacher.Any(t => t.TeachersId == teacherId);
     }
 
     public bool UpdateTeacher(Teacher teacher)
