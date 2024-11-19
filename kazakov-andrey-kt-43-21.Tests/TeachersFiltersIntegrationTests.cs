@@ -18,10 +18,16 @@ namespace kazakov_andrey_kt_43_21.Tests
 
       if (!context.Teachers.Any())
       {
-        Department departmentMeth = new Department 
+        Department departmentMаth = new Department 
         {
           DepartmentId = 1,
           DepartmentName = "Кафедра Математики"
+        };
+
+        Department departmentHim = new Department
+        {
+          DepartmentId = 2,
+          DepartmentName = "Кафедра Химии"
         };
 
         Position positionProfesor = new Position
@@ -32,51 +38,39 @@ namespace kazakov_andrey_kt_43_21.Tests
 
         Position positionAsperant = new Position
         {
-          PositionId = 3,
-          PositionName = "Асперант"
+          PositionId = 2,
+          PositionName = "Аспирант"
         };
+
+        context.Department.AddRange(departmentMаth);
+        context.Department.AddRange(departmentHim);
+        context.Positions.AddRange(positionProfesor);
+        context.Positions.AddRange(positionAsperant);
 
         context.Teachers.AddRange(
           new Teacher
           {
-            TeachersId = 1,
-            FirstName = "AA",
-            LastName = "AA",
-            MiddleName = "AA",
+            FirstName = "Первый",
+            LastName = "Первый",
+            MiddleName = "Первый",
             DepartmentId = 1,
-            Department = departmentMeth,
-            PositionId = 1,
-            Position = positionProfesor
+            PositionId = 1
           },
           new Teacher
           {
-            TeachersId = 2,
-            FirstName = "PP",
-            LastName = "PP",
-            MiddleName = "PP",
+            FirstName = "Первый",
+            LastName = "Первый",
+            MiddleName = "Первый",
             DepartmentId = 2,
-            Department = new Department
-            {
-              DepartmentId = 2,
-              DepartmentName = "Кафедра Физика"
-            },
-            PositionId = 2,
-            Position = new Position
-            {
-              PositionId = 2,
-              PositionName = "Преподаватель"
-            }
+            PositionId = 1,
           },
           new Teacher
           {
-            TeachersId = 3,
-            FirstName = "СС",
-            LastName = "СС",
-            MiddleName = "СС",
+            FirstName = "Первый",
+            LastName = "Первый",
+            MiddleName = "Второй",
             DepartmentId = 1,
-            Department = departmentMeth,
-            PositionId = 3,
-            Position = positionAsperant
+            PositionId = 1,
           }
         );
         context.SaveChanges();
@@ -104,13 +98,13 @@ namespace kazakov_andrey_kt_43_21.Tests
 
       TeacherDataFilter filter = new()
       {
-        FirstName = "AA",      
-        LastName = "AA",      
-        MiddleName = "AA" 
+        FirstName = "Первый",      
+        LastName = "Первый",      
+        MiddleName = "Первый" 
       };
 
       var result = teacherService.GetTeachersByDataAsync(filter);
-      Assert.Equal(1, result.Result.Length);
+      Assert.Equal(2, result.Result.Length);
     }
 
     [Fact]
@@ -140,7 +134,7 @@ namespace kazakov_andrey_kt_43_21.Tests
       };
 
       var result = teacherService.GetTeachersByPositionAsync(filter);
-      Assert.Equal(1, result.Result.Length);
+      Assert.Equal(3, result.Result.Length);
     }
   }
 }

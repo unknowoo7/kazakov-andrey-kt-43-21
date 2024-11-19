@@ -51,7 +51,7 @@ namespace kazakov_andrey_kt_43_21.Tests
       //arrange
       var test = new Position
       {
-        PositionName = "Химия"
+        PositionName = "Профессор"
       };
 
       //act

@@ -55,7 +55,7 @@ namespace kazakov_andrey_kt_43_21.Tests
       Department departmentHimii = new Department
       {
         DepartmentId = 2,
-        DepartmentName = "Кафедра Химии"
+        DepartmentName = " Химии"
       };
 
       var result = service.AddDepartment(departmentHimii);
@@ -69,7 +69,7 @@ namespace kazakov_andrey_kt_43_21.Tests
       //arrange
       var test = new Department
       {
-        DepartmentName = "Кафедра Математики"
+        DepartmentName = "Ка Математики"
       };
 
       //act
